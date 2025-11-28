@@ -1,9 +1,35 @@
 import { createRoot } from 'react-dom/client'
+import Casa from './components/Casa.jsx'
 
-const town = (
-  <h3>Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu</h3>
-);
+const town = "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu";
+
+const TownElement = (props) => {
+  let townNamme =  town;
+  if (props.id) {
+    townNamme = props.id;
+  } else if (props) {
+    console.log(props);
+  } else {
+    townNamme = town;
+  }
+  return <h3>{townNamme}</h3>;
+};
+
+const SateFL = () => {
+  return (
+    <>
+      <TownElement />
+      <TownElement id="Open Road" />
+      <TownElement id="Millonario gracias a la IA" />
+      <TownElement id="Millionaire Thanks to AI" />
+      <p>is in the state of New Zealand</p>
+    </>
+  );
+}
 
 createRoot(document.getElementById('root')).render(
-    town
+  <>
+    <SateFL />
+    <Casa />
+  </>
 )
