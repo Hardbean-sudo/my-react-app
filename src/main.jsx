@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import Casa from './components/Casa.jsx'
 import Carro from './components/Carro.jsx'
+import Padre from './components/Padre.jsx';
 
 const town = "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu";
 
@@ -38,5 +39,6 @@ createRoot(document.getElementById('root')).render(
     <SateFL />
     <Casa />
     <Carro carinfo={carInfo} />
+    <Padre />
   </>
 )
