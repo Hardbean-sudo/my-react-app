@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import Casa from './components/Casa.jsx'
 import Carro from './components/Carro.jsx'
 import Padre from './components/Padre.jsx';
+import TeamFruta from './components/teamFruta.jsx';
 
 const town = "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu";
 
@@ -40,5 +41,6 @@ createRoot(document.getElementById('root')).render(
     <Casa />
     <Carro carinfo={carInfo} />
     <Padre />
+    <TeamFruta />
   </>
 )
