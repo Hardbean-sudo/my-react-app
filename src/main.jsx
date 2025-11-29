@@ -3,6 +3,7 @@ import Casa from './components/Casa.jsx'
 import Carro from './components/Carro.jsx'
 import Padre from './components/Padre.jsx';
 import TeamFruta from './components/teamFruta.jsx';
+import './index.css';
 
 const town = "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu";
 
