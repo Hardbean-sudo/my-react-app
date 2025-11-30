@@ -1,4 +1,11 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+
+const Perrafo = styled.h1`
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+`;
 
 function TeamFruta() {
   const [selectedFruit, setSelectedFruit] = useState('banana');
@@ -14,7 +21,7 @@ function TeamFruta() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <p>Select your favorite fruit:</p>
+      <Perrafo>Select your favorite fruit:</Perrafo>
       <label>
         <input 
           type="radio" 
