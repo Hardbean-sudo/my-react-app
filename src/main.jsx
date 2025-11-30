@@ -4,11 +4,12 @@ import Carro from './components/Carro.jsx'
 import Padre from './components/Padre.jsx';
 import TeamFruta from './components/teamFruta.jsx';
 import './index.css';
+import { BrowserRouter, Routes, Route, NavLink, Outlet } from 'react-router-dom';
 
 const town = "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu";
 
 const TownElement = (props) => {
-  let townNamme =  town;
+  let townNamme = town;
   if (props.id) {
     townNamme = props.id;
   } else if (props) {
@@ -19,6 +20,13 @@ const TownElement = (props) => {
   return <h3>{townNamme}</h3>;
 };
 
+const navLinkStyle = ({ isActive }) => ({
+  color: isActive ? '#007bff' : '#333',
+  textDecoration: isActive ? 'none' : 'underline',
+  fontWeight: isActive ? 'bold' : 'normal',
+  padding: '5px 10px'
+});
+
 const SateFL = () => {
   return (
     <>
@@ -27,6 +35,11 @@ const SateFL = () => {
       <TownElement id="Millonario gracias a la IA" />
       <TownElement id="Millionaire Thanks to AI" />
       <p>is in the state of New Zealand</p>
+      <nav>
+        <NavLink to="/padre" style={navLinkStyle}>Padre</NavLink> |{' '}
+        <NavLink to="/teamfruta" style={navLinkStyle}>TeamFruta</NavLink>
+      </nav>
+      <Outlet />
     </>
   );
 }
@@ -34,14 +47,23 @@ const carInfo = {
   name: "Ford",
   model: "Mustang",
   color: "green",
-  year: 1969};
+  year: 1969
+};
 
 createRoot(document.getElementById('root')).render(
-  <>
-    <SateFL />
-    <Casa />
-    <Carro carinfo={carInfo} />
-    <Padre />
-    <TeamFruta />
-  </>
+  <BrowserRouter>
+    <nav>
+      <NavLink to="/" style={navLinkStyle}>SateFL</NavLink> |{' '}
+      <NavLink to="/casa" style={navLinkStyle}>Casa</NavLink> |{' '}
+      <NavLink to="/carro" style={navLinkStyle}>Carro</NavLink> |{' '}
+    </nav>
+    <Routes>
+      <Route path="/" element={<SateFL />} >
+        <Route path="/padre" element={<Padre />} />
+        <Route path="/teamfruta" element={<TeamFruta />} />
+      </Route>
+      <Route path="/casa" element={<Casa />} />
+      <Route path="/carro" element={<Carro carinfo={carInfo} />} />
+    </Routes>
+  </BrowserRouter>
 )
