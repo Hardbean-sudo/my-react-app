@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { forwardRef, useRef } from 'react';
 
 const Perrafo = styled.h1`
   padding: 10px 20px;
@@ -7,7 +8,18 @@ const Perrafo = styled.h1`
   color: white;
 `;
 
+const MyInputa = forwardRef((propsito, refri) => (
+  <input ref={refri} {...propsito} />
+));
+
 function TeamFruta() {
+
+  const inputReferencia = useRef();
+
+  const tiraTalla = (x) => {
+    inputReferencia.current.value = x;
+  };
+
   const [selectedFruit, setSelectedFruit] = useState('banana');
 
   const handleChange = (event) => {
@@ -15,7 +27,8 @@ function TeamFruta() {
   };
 
   const handleSubmit = (event) => {
-    alert(`Your favorite fruit is: ${selectedFruit}`);
+    tiraTalla(selectedFruit);
+    // alert(`Your favorite fruit is: ${selectedFruit}`);
     event.preventDefault();
   };
 
@@ -51,6 +64,8 @@ function TeamFruta() {
           onChange={handleChange} 
         /> Cherry
       </label>
+      <br />
+      <MyInputa ref={inputReferencia} placeholder="Type here..." />
       <br />
       <button type="submit">Submit</button>
     </form>
