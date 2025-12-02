@@ -1,8 +1,9 @@
 import { createRoot } from 'react-dom/client'
+import { useState } from 'react';
 import Casa from './components/Casa.jsx'
 import Carro from './components/Carro.jsx'
 import Padre from './components/Padre.jsx';
-import TeamFruta from './components/teamFruta.jsx';
+import TeamFruta from './components/TeamFruta.jsx';
 import './index.css';
 import { BrowserRouter, Routes, Route, NavLink, Outlet } from 'react-router-dom';
 
@@ -28,13 +29,15 @@ const navLinkStyle = ({ isActive }) => ({
 });
 
 const SateFL = () => {
+  const [wecopen, setWecopen] = useState("Wecopen");
   return (
     <>
       <TownElement />
       <TownElement id="Open Road" />
       <TownElement id="Millonario gracias a la IA" />
       <TownElement id="Millionaire Thanks to AI" />
-      <p>is in the state of New Zealand</p>
+      <p>is in the {wecopen} of New Zealand</p>
+      <button onClick={() => setWecopen(wecopen === "Wecopen" ? "TakiMomomoo" : "Wecopen")}>Set Wecopen</button>
       <nav>
         <NavLink to="/padre" style={navLinkStyle}>Padre</NavLink> |{' '}
         <NavLink to="/teamfruta" style={navLinkStyle}>TeamFruta</NavLink>
