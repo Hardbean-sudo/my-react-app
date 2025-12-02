@@ -7,7 +7,7 @@ function Counter() {
     setTimeout(() => {
       setCalculation(() => count + 1);
     }, 2000);
-  }, []); // <- add the count variable here
+  }, [count]); // <- add the count variable here
 
   return (
     <>
