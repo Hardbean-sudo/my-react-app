@@ -6,6 +6,7 @@ import Padre from './components/Padre.jsx';
 import TeamFruta from './components/TeamFruta.jsx';
 import './index.css';
 import { BrowserRouter, Routes, Route, NavLink, Outlet } from 'react-router-dom';
+import Hooks from './pages/hooks.jsx';
 
 const town = "Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu";
 
@@ -59,6 +60,7 @@ createRoot(document.getElementById('root')).render(
       <NavLink to="/" style={navLinkStyle}>SateFL</NavLink> |{' '}
       <NavLink to="/casa" style={navLinkStyle}>Casa</NavLink> |{' '}
       <NavLink to="/carro" style={navLinkStyle}>Carro</NavLink> |{' '}
+      <NavLink to="/hooks" style={navLinkStyle}>Hooks</NavLink>
     </nav>
     <Routes>
       <Route path="/" element={<SateFL />} >
@@ -67,6 +69,7 @@ createRoot(document.getElementById('root')).render(
       </Route>
       <Route path="/casa" element={<Casa />} />
       <Route path="/carro" element={<Carro carinfo={carInfo} />} />
+      <Route path="/hooks" element={<Hooks />} />
     </Routes>
   </BrowserRouter>
 )
