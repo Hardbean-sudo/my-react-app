@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useState, createContext, useContext, useRef, useEffect } from 'react';
+import { useState, createContext, useContext, useRef, useEffect, useReducer } from 'react';
 import { createRoot } from 'react-dom/client';
 
 const UserContext = createContext();
@@ -26,7 +26,7 @@ function Component2() {
 
   return (
     <>
-    <h1>Component <span ref={headingRef}>2</span></h1>
+      <h1>Component <span ref={headingRef}>2</span></h1>
       <input
         type="text"
         value={inputValue}
@@ -35,7 +35,7 @@ function Component2() {
           headingRef.current.innerText = e.target.value;
         }}
         onLoad={
-          console.log("Current: " + inputValue + " previus: " + previousInputValue.current )
+          console.log("Current: " + inputValue + " previus: " + previousInputValue.current)
         }
       />
       <h2>Current Value: {inputValue}</h2>
@@ -57,14 +57,78 @@ function Component3() {
   );
 }
 
+const ReducerExample = () => {
+  const initialScore = [
+    { name: 'Pedro', score: 0 },
+    { name: 'Pablo', score: 0 },
+  ]
+  const changeScore = (state, action) => {
+    let newScore = {};
+    switch (action.type) {
+      case 'increment':
+        newScore = state.map(player => {
+          if (player.name === action.name) {
+            return { ...player, score: player.score + 1 };
+          } else {
+            return player;
+          }
+        });
+        break;
+      case 'decrease':
+        newScore = state.map(player => {
+          if (player.name === action.name) {
+            return { ...player, score: player.score - 1 };
+          } else {
+            return player;
+          }
+        });
+        break;
+      default:
+        newScore = state;
+    }
+    return newScore;
+  }
+  const [selectedPlayer, setSelectedPlayer] = useState('Pedro');
+  const onRadioChange = (event) => {
+    setSelectedPlayer(event.target.name);
+  }
+  const [score, dispatch] = useReducer(changeScore, initialScore)
+  return (
+    <>
+      <h1>Reducer Example</h1>
+      <label>
+        <input 
+        type="radio"
+        name={score[0].name}
+        checked={selectedPlayer === score[0].name}
+        onChange={onRadioChange}
+        /> Pedro: {score[0].score}
+      </label>
+      <br />
+      <label>
+        <input 
+        type="radio"
+        name={score[1].name}
+        checked={selectedPlayer === score[1].name}
+        onChange={onRadioChange}
+        /> Pablo: {score[1].score}
+      </label>
+      <br />
+      <button onClick={() => dispatch({type: "increment", name: selectedPlayer})}>Aumentar</button>
+      <button onClick={() => dispatch({type: "decrease", name: selectedPlayer})}>Disminuir</button>
+    </>
+  )
+}
+
 const Hooks = () => {
 
-    return (
-        <>
-        <NavLink to="/" style={{ marginRight: '10px', marginTop: '10px' }}>Go Home</NavLink>
-        <Component1 />
-        </>
-    )
+  return (
+    <>
+      <NavLink to="/" style={{ marginRight: '10px', marginTop: '10px' }}>Go Home</NavLink>
+      <Component1 />
+      <ReducerExample />
+    </>
+  )
 };
 
 export default Hooks;
