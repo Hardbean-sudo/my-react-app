@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useState, createContext, useContext } from 'react';
+import { useState, createContext, useContext, useRef, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 
 const UserContext = createContext();
@@ -16,9 +16,30 @@ function Component1() {
 }
 
 function Component2() {
+  const [inputValue, setInputValue] = useState("");
+  const previousInputValue = useRef("");
+  const headingRef = useRef();
+
+  useEffect(() => {
+    previousInputValue.current = inputValue;
+  }, [inputValue]);
+
   return (
     <>
-      <h1>Component 2</h1>
+    <h1>Component <span ref={headingRef}>2</span></h1>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => {
+          setInputValue(e.target.value)
+          headingRef.current.innerText = e.target.value;
+        }}
+        onLoad={
+          console.log("Current: " + inputValue + " previus: " + previousInputValue.current )
+        }
+      />
+      <h2>Current Value: {inputValue}</h2>
+      <h2>Previous Value: {previousInputValue.current}</h2>
       <Component3 />
     </>
   );
